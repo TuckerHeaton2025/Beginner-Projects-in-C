@@ -5,6 +5,8 @@
 #include <stdbool.h>
 
 char board[3][3];
+
+// I challenge you to modify this file so that the user can choose wether they are X or O
 const char PLAYER = 'X';
 const char COMP = 'O';
 //COMP = Computer
@@ -37,11 +39,11 @@ int main()
 
         while(true)
         {
-            
+            // The player always goes first. Could you make it random?
             display_board();
             players_turn();
             turns ++;
-            // Not possible to win in under 5 turns
+            // Not possible to win in under 5 turns no point in checking
             if(turns >= 5)
             {
                 winner = check_winner();
@@ -83,9 +85,10 @@ int main()
 
     }while(tolower(play_again) != 'n');
 
+     printf("\nThank you for playing!\n\n");
+    
     if(games > 1)
     {
-        printf("\nThank you for playing!\n\n");
         printf("Games played: %d\n", games);
         printf("Your score: %d\n", player_score);
         printf("Computer's score: %d\n", computer_score);
@@ -97,6 +100,7 @@ int main()
 
 void clear_board()
 {
+    // Change all spots in the grid to ' '
     for(int row = 0; row < 3; row++)
     {
         for(int column = 0; column < 3; column++)
@@ -122,9 +126,9 @@ int check_empty_spaces()
     {
         for(int column = 0; column < 3; column++)
         {
-            /* For each spot in the board check if 
-            there is an empty space if their is 
-            increase free spaces by one.
+            /* 
+            * increment free_spaces based on the number 
+            * of ' ' (blank spaces) found 👇
             */
             if(board[row][column] == ' ')
             {
@@ -141,11 +145,12 @@ void players_turn()
 {
     int row = 0;
     int col = 0;
- 
+
+    // Its easier to understand 1-3 than 0-2
     printf("Enter a row (1-3): "); scanf("%d", &row);
     printf("Enter a column (1-3): "); scanf("%d", &col);
-
-    while(row < 1 || col < 1 || row > 3 || col > 3 || board[row-1][col-1] != ' ')
+    
+    while(true)
     {    
         if(row < 1 || col < 1 || row > 3 || col > 3)
         {
@@ -155,11 +160,14 @@ void players_turn()
         {
             printf("\nSpot Taken\n");
         }
+        else
+        {
+            break;
+        }
         printf("Enter a row (1-3): "); scanf("%d", &row);
         printf("Enter a column (1-3): "); scanf("%d", &col);
     }
     
-
     board[row-1][col-1] = PLAYER;
 }
 
@@ -169,12 +177,15 @@ void comps_turn()
     int col = 0;
     srand(time(0));
 
-    do{
+    do{ 
+        // The modulus operator limits the rand 
+        // (random) output from going over 3
         row = rand() % 3;
         col = rand() % 3;
     }
     while(board[row][col] != ' ');
-
+    // We check to make sure the space is empty
+    
     board[row][col] = COMP;
     
 }
@@ -182,10 +193,10 @@ void comps_turn()
 char check_winner()
 {
 
-    /* We have to make sure were not returning a 
-    * blank char ' ' until the end as returning one 
-    * before the end could stop 
-    * us from finding a possible winner.
+    /* 
+    * We have to make sure were not returning a blank char ' ' 
+    * until the endas returning one before the end could stop 
+    * us from finding a possible winner. (return statements stop a function)
     */
 
     for(int row = 0; row < 3; row ++)
@@ -220,13 +231,8 @@ char check_winner()
     {
         return board[0][2];
     }
-    
-    
-    /* 
-    * We do not return a blank character 
-    * until all possible win conditions have been checked as 
-    * returning something stops the function
-    */
+
+    // As possible conditons have been checked return ' '
 
     return ' ';
 }
@@ -248,4 +254,5 @@ void display_winner(char winner)
             printf("display_winner ERROR\n");
 
     }
+
 }
