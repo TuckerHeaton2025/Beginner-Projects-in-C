@@ -5,7 +5,7 @@ C is a low to mid level programming language invented in the 70s it has influenc
 Why learn C?
 
 Once you've learned C you can learn 99% of all other language quicker and easier. Why? Because every other language either compiles down to 
-C or is an extension of it. Learning C allows you to understand the fundemantals of how computers work and manage memory.
+C or is an extension of it. Learning C allows you to understand the fundamentals of how computers work and manage memory.
 
 https://en.wikipedia.org/wiki/List_of_C-family_programming_languages
 
