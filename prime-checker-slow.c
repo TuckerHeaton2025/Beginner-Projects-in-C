@@ -93,7 +93,7 @@ int main()
                     if(i % k == 0 && i != k) // if this is true its not a prime
                     {
                         is_prime = false;
-                        break; // Thats right a break statement, this will make the progam alot faster
+                        break; // Thats right a break statement, this will make the program a lot faster
                     }
                 }
 
@@ -140,4 +140,5 @@ int main()
     }
 
     return 0;
+
 }
