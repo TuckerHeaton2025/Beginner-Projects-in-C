@@ -55,8 +55,12 @@ int main()
     // 🔽 malloc for dynamic size
     int *arr = (int*)malloc(size*sizeof(int)); // sizeof for dynamic use (int size may vary across compilers)
 
+    bool incl_neg = false; // if theres a negative else abs doesn't matter
     for(int i = 0; i < size; i++){
         printf("item %d > ", i+1); scanf("%d", arr+i); // ◀ alternative to arr[i]
+        if(arr[i] < 0){
+            incl_neg = true;
+        }
     }
 
     printf("\n");
@@ -66,13 +70,7 @@ int main()
     
     int (*comp_func)(int,int); // holds the function we will use
     comp_func = comp; // defualts to normal not abs func
-    bool incl_neg = false; // if theres a negative else abs doesn't matter
-    for(int i = 0; i < size; i++){
-        if(arr[i] < 0){
-            incl_neg = true;
-            break;
-        }
-    }
+   
     if(incl_neg){
         char sort_abs_choice;
         printf("sort negative numbers by absolute value (ie. ignore negative sign) (y,n)?: "); scanf(" %c", &sort_abs_choice);
